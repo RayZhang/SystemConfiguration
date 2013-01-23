@@ -22,7 +22,7 @@
 @implementation UIDevice (SystemConfiguration)
 
 - (CFBooleanRef)systemConfigurationForKey:(CFStringRef)key {
-    CFTypeRef retVal = nil;
+    CFBooleanRef retVal = nil;
     CFStringRef name = (CFStringRef)[[NSBundle mainBundle] bundleIdentifier];
     CFStringRef prefsID = nil;
     if (CFStringCompare(key, kAirplaneMode, kCFCompareAnchored) == kCFCompareEqualTo) {
