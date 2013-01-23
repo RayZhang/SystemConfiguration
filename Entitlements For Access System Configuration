@@ -10,8 +10,8 @@
 	<true/>
     <key>com.apple.SystemConfiguration.SCPreferences-write-access</key>
 	<array>
-		<string>com.apple.radios.plist</string>
-		<string>com.apple.wifi.plist</string>
+	    <string>com.apple.radios.plist</string>
+	    <string>com.apple.wifi.plist</string>
 	</array>
 </dict>
 </plist>
