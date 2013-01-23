@@ -1,4 +1,6 @@
 SystemConfiguration
 ===================
 
-This code for developers who want to turn On/Off airplane mode and Wi-Fi Inner Application.
+This code for developer who wants to turn On/Off airplane mode and WiFi inner application.
+
+Just for jailbroken device
