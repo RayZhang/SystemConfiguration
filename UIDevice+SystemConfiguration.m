@@ -90,7 +90,6 @@
     if (on) {
         value = kCFBooleanTrue;
     }
-    
     [self setSystemConfigurationValue:value forKey:kAirplaneMode];
 }
 
