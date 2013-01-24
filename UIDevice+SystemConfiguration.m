@@ -34,7 +34,7 @@
     if (prefsID) {
         SCPreferencesRef preferences = SCPreferencesCreateWithAuthorization(kCFAllocatorDefault, name, prefsID, NULL);
         if (preferences) {
-            Boolean result = SCPreferencesLock(preferences, YES);
+            Boolean result = SCPreferencesLock(preferences, TRUE);
             if (result == TRUE) {
                 retVal = SCPreferencesGetValue(preferences, key);
                 SCPreferencesUnlock(preferences);
@@ -58,7 +58,7 @@
     if (prefsID) {
         SCPreferencesRef preferences = SCPreferencesCreateWithAuthorization(kCFAllocatorDefault, name, prefsID, NULL);
         if (preferences) {
-            Boolean result = SCPreferencesLock(preferences, YES);
+            Boolean result = SCPreferencesLock(preferences, TRUE);
             if (result == TRUE) {
                 result = SCPreferencesSetValue(preferences, key, value);
                 if (result == TRUE) {
