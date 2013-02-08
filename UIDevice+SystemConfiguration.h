@@ -19,4 +19,12 @@
 - (BOOL)isWiFiOn;
 - (void)setWiFiOn:(BOOL)on;
 
+- (BOOL)isAutoPowerOnWithKey:(CFStringRef)onOrOff;
+
+- (BOOL)isAutoPowerOn;
+- (void)setAutoPowerOnTime:(NSInteger)minutes;
+
+- (BOOL)isAutoPowerOff;
+- (void)setAutoPowerOffTime:(NSInteger)minutes;
+
 @end
