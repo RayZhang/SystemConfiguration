@@ -5,6 +5,6 @@ This code for developer who wants to turn on/off airplane mode and WiFi inner ap
 
 Just for jailbroken device
 
-You should signed exective file with the Entitlements like:
+You should signed executive file with the Entitlements like:
 
-	ldid -Entitlements.plist Application.app/Application
+	codesign -fs "iPhone Developer" --entitlements Entitlements.plist Application.app
