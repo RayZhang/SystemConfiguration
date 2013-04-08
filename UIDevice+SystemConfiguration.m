@@ -15,12 +15,9 @@
 
 #define kAirplaneMode CFSTR("AirplaneMode")
 #define kWiFi CFSTR("AllowEnable")
-#define kPowerOn CFSTR("RepeatingPowerOn")
-#define kPowerOff CFSTR("RepeatingPowerOff")
 
 #define SCAirplaneID CFSTR("com.apple.radios.plist")
 #define SCWiFiID CFSTR("com.apple.wifi.plist")
-#define SCAutoWakeID CFSTR("com.apple.AutoWake.plist")
 
 @implementation UIDevice (SystemConfiguration)
 
@@ -32,8 +29,6 @@
         prefsID = SCAirplaneID;
     } else if (CFStringCompare(key, kWiFi, kCFCompareAnchored) == kCFCompareEqualTo) {
         prefsID = SCWiFiID;
-    } else if (!(CFStringCompare(key, kPowerOff, kCFCompareAnchored) && CFStringCompare(key, kPowerOn, kCFCompareAnchored))) {
-        prefsID = SCAutoWakeID;
     }
     
     if (prefsID) {
@@ -58,8 +53,6 @@
         prefsID = SCAirplaneID;
     } else if (CFStringCompare(key, kWiFi, kCFCompareAnchored) == kCFCompareEqualTo) {
         prefsID = SCWiFiID;
-    } else if (!(CFStringCompare(key, kPowerOff, kCFCompareAnchored) && CFStringCompare(key, kPowerOn, kCFCompareAnchored))) {
-        prefsID = SCAutoWakeID;
     }
     
     if (prefsID) {
@@ -88,8 +81,6 @@
         prefsID = SCAirplaneID;
     } else if (CFStringCompare(key, kWiFi, kCFCompareAnchored) == kCFCompareEqualTo) {
         prefsID = SCWiFiID;
-    } else if (!(CFStringCompare(key, kPowerOff, kCFCompareAnchored) && CFStringCompare(key, kPowerOn, kCFCompareAnchored))) {
-        prefsID = SCAutoWakeID;
     }
     
     if (prefsID) {
@@ -149,49 +140,5 @@
     [self setSystemConfigurationValue:value forKey:kWiFi];
 }
 
-- (BOOL)isAutoPowerOnWithKey:(CFStringRef)onOrOff {
-    BOOL retVal = NO;
-    CFDictionaryRef autoPower = [self systemConfigurationForKey:onOrOff];
-    if (autoPower) {
-        retVal = YES;
-    }
-    return NO;
-}
-
-- (void)setAutoPowerOnWithKey:(CFStringRef)powerKey time:(NSInteger)minutes {
-    if (minutes < 0) {
-        [self removeSystemConfigurationForKey:powerKey];
-    } else {
-        CFStringRef keys[] = {CFSTR("eventtype"), CFSTR("time"), CFSTR("weekdays")};
-        
-        CFNumberRef timeValue = CFNumberCreate(kCFAllocatorDefault, kCFNumberNSIntegerType, &minutes);
-        NSInteger weekdays = 127;
-        CFNumberRef weekdaysValue = CFNumberCreate(kCFAllocatorDefault, kCFNumberNSIntegerType, &weekdays);
-        CFTypeRef values[] = {CFSTR("shutdown"), timeValue, weekdaysValue};
-        
-        CFDictionaryRef value = CFDictionaryCreate(kCFAllocatorDefault, (const void **)keys, (const void **)values, 3, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
-        
-        [self setSystemConfigurationValue:value forKey:powerKey];
-        
-        CFRelease(weekdaysValue);
-        CFRelease(timeValue);
-    }
-}
-
-- (BOOL)isAutoPowerOn {
-    return [self isAutoPowerOnWithKey:kPowerOn];
-}
-
-- (void)setAutoPowerOnTime:(NSInteger)minutes {
-    [self setAutoPowerOnWithKey:kPowerOn time:minutes];
-}
-
-- (BOOL)isAutoPowerOff {
-    return [self isAutoPowerOnWithKey:kPowerOff];
-}
-
-- (void)setAutoPowerOffTime:(NSInteger)minutes {
-    [self setAutoPowerOnWithKey:kPowerOff time:minutes];
-}
 
 @end
