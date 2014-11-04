@@ -19,4 +19,7 @@
 - (BOOL)isWiFiOn;
 - (void)setWiFiOn:(BOOL)on;
 
+- (BOOL)VPNEnabled;
+- (void)setVPNEnabled:(BOOL)enabled;
+
 @end
