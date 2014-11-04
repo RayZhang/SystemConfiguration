@@ -19,11 +19,15 @@
 #define SCAirplaneID CFSTR("com.apple.radios.plist")
 #define SCWiFiID CFSTR("com.apple.wifi.plist")
 
+static void callout(SCNetworkConnectionRef connection, SCNetworkConnectionStatus status, void *info) {
+    
+}
+
 @implementation UIDevice (SystemConfiguration)
 
 - (CFTypeRef)systemConfigurationForKey:(CFStringRef)key {
     CFTypeRef retVal = nil;
-    CFStringRef name = (CFStringRef)[[NSBundle mainBundle] bundleIdentifier];
+    CFStringRef name = CFBundleGetIdentifier(CFBundleGetMainBundle());
     CFStringRef prefsID = nil;
     if (CFStringCompare(key, kAirplaneMode, kCFCompareAnchored) == kCFCompareEqualTo) {
         prefsID = SCAirplaneID;
@@ -47,7 +51,7 @@
 }
 
 - (void)setSystemConfigurationValue:(CFTypeRef)value forKey:(CFStringRef)key {
-    CFStringRef name = (CFStringRef)[[NSBundle mainBundle] bundleIdentifier];
+    CFStringRef name = CFBundleGetIdentifier(CFBundleGetMainBundle());
     CFStringRef prefsID = nil;
     if (CFStringCompare(key, kAirplaneMode, kCFCompareAnchored) == kCFCompareEqualTo) {
         prefsID = SCAirplaneID;
@@ -75,7 +79,7 @@
 }
 
 - (void)removeSystemConfigurationForKey:(CFStringRef)key {
-    CFStringRef name = (CFStringRef)[[NSBundle mainBundle] bundleIdentifier];
+    CFStringRef name = CFBundleGetIdentifier(CFBundleGetMainBundle());
     CFStringRef prefsID = nil;
     if (CFStringCompare(key, kAirplaneMode, kCFCompareAnchored) == kCFCompareEqualTo) {
         prefsID = SCAirplaneID;
@@ -138,10 +142,6 @@
         value = kCFBooleanTrue;
     }
     [self setSystemConfigurationValue:value forKey:kWiFi];
-}
-
-static void callout(SCNetworkConnectionRef connection, SCNetworkConnectionStatus status, void *info) {
-    
 }
 
 - (BOOL)VPNEnabled {
